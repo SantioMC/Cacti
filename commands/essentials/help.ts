@@ -79,18 +79,18 @@ class help extends Command {
           embed.addField('Command Name', `${commandData.data.name} (${commandData.data.category})`, true);
           embed.addField('Command Aliases', `\`\`\`${commandData.data.aliases != undefined ? commandData.data.aliases.join(' ') : 'None'}\`\`\``, true);
           embed.addField('\u200b', '\u200b', true);
-          embed.addField('Description', commandData.data.description);
-          embed.addField(
-            'Syntax',
-            commandData.data.arguments == undefined ? 'This command has no extra syntax.' : `\`\`\`html\n${commandData.generateSyntax()}\`\`\``,
-            true
-          );
+          embed.addField('Description', commandData.data.description, true);
           embed.addField(
             'Permissions Required',
             commandData.data.permissions == undefined ? 'This command requires no permissions' : `\`\`\`\n${commandData.data.permissions.join('\n')}\`\`\``,
             true
           );
           embed.addField('\u200b', '\u200b', true);
+          embed.addField(
+            'Syntax',
+            commandData.data.arguments == undefined ? 'This command has no extra syntax.' : `\`\`\`html\n${commandData.generateSyntax()}\`\`\``,
+            true
+          );
           if (commandData.data.guild != undefined) embed.addField(' ', ':warning: This command is limited to a certain guild only!');
         } else
           event.message.channel.send(
