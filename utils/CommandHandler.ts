@@ -1,10 +1,10 @@
-import { Guild, GuildMember, Message, MessageEmbed, PermissionResolvable } from 'discord.js';
-import fs = require('fs');
+import {Guild, GuildMember, Message, MessageEmbed, PermissionResolvable} from 'discord.js';
 import * as path from 'path';
-import { BotClient } from './BotClient';
-import { Command, ICommandData, Argument, PermissionLevel } from './Command';
+import {BotClient} from './BotClient';
+import {Argument, Command, ICommandData, PermissionLevel} from './Command';
 import * as mongoose from 'mongoose';
-import { ITag } from '../models/tag';
+import {ITag} from '../models/tag';
+import fs = require('fs');
 
 export class CommandHandler {
   commands: Map<string, Command> = new Map();

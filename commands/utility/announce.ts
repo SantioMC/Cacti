@@ -1,6 +1,6 @@
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
-import { GuildChannel, MessageEmbed, TextChannel } from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
+import {GuildChannel, MessageEmbed, TextChannel} from 'discord.js';
 
 class announce extends Command {
   constructor(client: BotClient) {

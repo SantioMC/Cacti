@@ -1,10 +1,10 @@
-import { GuildMember, Message, MessageEmbed } from 'discord.js';
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
-import { IInfraction } from '../../models/infraction';
+import {GuildMember, Message, MessageEmbed} from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
+import {IInfraction} from '../../models/infraction';
 import mongoose from 'mongoose';
 import ms from 'ms';
-import { MessageButton } from 'discord-buttons';
+import {MessageButton} from 'discord-buttons';
 
 class infractions extends Command {
   constructor(client: BotClient) {

@@ -1,6 +1,6 @@
-import { Message, MessageEmbed } from 'discord.js';
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
+import {Message, MessageEmbed} from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
 
 class ping extends Command {
   constructor(client: BotClient) {

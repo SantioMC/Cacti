@@ -1,6 +1,6 @@
 import * as Discord from 'discord.js';
-import { BotClient } from '../../utils/BotClient';
-import { Listener } from '../../utils/Listener';
+import {BotClient} from '../../utils/BotClient';
+import {Listener} from '../../utils/Listener';
 
 export class verification extends Listener {
   role!: Discord.Role | null;

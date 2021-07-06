@@ -1,5 +1,5 @@
-import { GuildMember, Message, PermissionResolvable } from 'discord.js';
-import { BotClient } from './BotClient';
+import {GuildMember, Message, PermissionResolvable} from 'discord.js';
+import {BotClient} from './BotClient';
 
 export class Command {
   public data!: ICommandData;

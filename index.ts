@@ -1,6 +1,6 @@
 require('dotenv').config();
 import mongoose from 'mongoose';
-import { BotClient, IClientData } from './utils/BotClient';
+import {BotClient, IClientData} from './utils/BotClient';
 
 // Connect to the database
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.NAME}?retryWrites=true&w=majority`, {

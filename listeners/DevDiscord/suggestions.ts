@@ -1,6 +1,6 @@
-import { BotClient } from '../../utils/BotClient';
-import { Listener } from '../../utils/Listener';
-import { Message } from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Listener} from '../../utils/Listener';
+import {Message} from 'discord.js';
 
 export class verification extends Listener {
   constructor(client: BotClient) {

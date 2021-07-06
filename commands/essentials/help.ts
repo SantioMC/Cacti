@@ -1,6 +1,6 @@
-import { MessageEmbed } from 'discord.js';
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, ICommandData, PermissionLevel } from '../../utils/Command';
+import {MessageEmbed} from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, ICommandData, PermissionLevel} from '../../utils/Command';
 
 class help extends Command {
   constructor(client: BotClient) {

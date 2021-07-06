@@ -1,11 +1,11 @@
-import { BotClient } from '../utils/BotClient';
-import { Listener } from '../utils/Listener';
-import { MessageButton, MessageComponent } from 'discord-buttons';
-import { GuildMember, MessageEmbed, Role } from 'discord.js';
+import {BotClient} from '../utils/BotClient';
+import {Listener} from '../utils/Listener';
+import {MessageButton, MessageComponent} from 'discord-buttons';
+import {GuildMember, MessageEmbed, Role} from 'discord.js';
 import mongoose from 'mongoose';
-import { IInfraction } from '../models/infraction';
+import {IInfraction} from '../models/infraction';
 import ms from 'ms';
-import { InfractionUtils } from '../utils/InfractionUtils';
+import {InfractionUtils} from '../utils/InfractionUtils';
 
 export class infractionListener extends Listener {
   constructor(client: BotClient) {

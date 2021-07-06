@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose';
-import { MessageEmbed } from 'discord.js';
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
-import { ITag } from '../../models/tag';
+import {MessageEmbed} from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
+import {ITag} from '../../models/tag';
 
 class tag extends Command {
   constructor(client: BotClient) {

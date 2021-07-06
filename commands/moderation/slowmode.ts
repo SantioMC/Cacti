@@ -1,7 +1,7 @@
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
 import ms from 'ms';
-import { GuildChannel, MessageEmbed, TextChannel } from 'discord.js';
+import {GuildChannel, MessageEmbed, TextChannel} from 'discord.js';
 
 class slowmode extends Command {
   slowmodes: Map<string, TextChannel[]> = new Map();

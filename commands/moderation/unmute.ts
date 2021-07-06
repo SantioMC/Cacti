@@ -1,8 +1,8 @@
-import { Message, MessageEmbed } from 'discord.js';
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
-import { IInfraction } from '../../models/infraction';
-import { InfractionUtils } from '../../utils/InfractionUtils';
+import {Message, MessageEmbed} from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
+import {IInfraction} from '../../models/infraction';
+import {InfractionUtils} from '../../utils/InfractionUtils';
 
 class unmute extends Command {
   constructor(client: BotClient) {

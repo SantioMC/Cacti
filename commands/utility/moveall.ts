@@ -1,9 +1,6 @@
-import { GuildChannel, GuildMember, Message, MessageEmbed, VoiceChannel } from 'discord.js';
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
-import mongoose from 'mongoose';
-import { IInfraction } from '../../models/infraction';
-import { InfractionUtils } from '../../utils/InfractionUtils';
+import {GuildChannel, GuildMember, MessageEmbed, VoiceChannel} from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
 
 class moveall extends Command {
   constructor(client: BotClient) {

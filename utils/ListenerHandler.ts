@@ -1,7 +1,7 @@
 import * as path from 'path';
-import { BotClient } from "./BotClient";
+import {BotClient} from "./BotClient";
 import * as fs from 'fs';
-import { Listener } from './Listener';
+import {Listener} from './Listener';
 
 export class ListenerHandler {
 	listeners: Map<String, Listener> = new Map();

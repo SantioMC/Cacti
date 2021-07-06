@@ -1,6 +1,6 @@
-import { GuildMember, Message, MessageEmbed, Role } from 'discord.js';
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
+import {GuildMember, Message, MessageEmbed, Role} from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
 
 class whois extends Command {
   constructor(client: BotClient) {

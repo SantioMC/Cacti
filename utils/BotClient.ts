@@ -1,11 +1,13 @@
-import { CommandHandler } from './CommandHandler';
-require('discord-reply');
+import {CommandHandler} from './CommandHandler';
 import * as discordbtn from 'discord-buttons';
+import {ICommandData} from './Command';
+import {IListenerData} from './Listener';
+import {ListenerHandler} from './ListenerHandler';
+import {InfractionUtils} from './InfractionUtils';
+
+require('discord-reply');
 import Discord = require('discord.js');
-import { ICommandData } from './Command';
-import { IListenerData } from './Listener';
-import { ListenerHandler } from './ListenerHandler';
-import { InfractionUtils } from './InfractionUtils';
+
 const YouTube = require('simple-youtube-api');
 
 export interface IClientData {

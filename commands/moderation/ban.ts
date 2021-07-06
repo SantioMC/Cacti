@@ -1,9 +1,7 @@
-import { GuildChannel, GuildMember, Message, MessageEmbed, Role } from 'discord.js';
-import { BotClient } from '../../utils/BotClient';
-import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
-import mongoose from 'mongoose';
-import { IInfraction, Infraction } from '../../models/infraction';
-import { InfractionUtils } from '../../utils/InfractionUtils';
+import {GuildMember, Message, MessageEmbed} from 'discord.js';
+import {BotClient} from '../../utils/BotClient';
+import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
+import {InfractionUtils} from '../../utils/InfractionUtils';
 import ms from 'ms';
 
 class ban extends Command {
