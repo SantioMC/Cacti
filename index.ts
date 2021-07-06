@@ -1,5 +1,5 @@
 require('dotenv').config();
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 import { BotClient, IClientData } from './utils/BotClient';
 
 // Connect to the database
