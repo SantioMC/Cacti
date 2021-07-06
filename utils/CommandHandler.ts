@@ -7,8 +7,8 @@ import { ITag } from '../models/tag';
 import fs = require('fs');
 
 export class CommandHandler {
-  commands: Map<string, Command> = new Map();
-  aliases: Map<string, string> = new Map();
+  static commands: Map<string, Command> = new Map();
+  static aliases: Map<string, string> = new Map();
   client: BotClient;
   members: GuildMember[];
   args: Object[];
@@ -36,8 +36,8 @@ export class CommandHandler {
 
     const createCommand = (client: BotClient, name: string, dir: string) => {
       var command: Command = require(dir + path.sep + name)(client) as Command;
-      this.commands.set(command.data?.name.toLowerCase(), command);
-      command.data?.aliases?.forEach((alias: string) => this.aliases.set(alias.toLowerCase(), name.toLowerCase()));
+      CommandHandler.commands.set(command.data?.name.toLowerCase(), command);
+      command.data?.aliases?.forEach((alias: string) => CommandHandler.aliases.set(alias.toLowerCase(), name.toLowerCase()));
 
       // TODO: Create slash commands (not important rn)
     };
@@ -57,7 +57,7 @@ export class CommandHandler {
     var parsedArgs: string[] = parseArgs(message.content);
     var command: string | undefined = parsedArgs.shift()?.toLowerCase().substring(prefixLength);
     if (command == undefined) return;
-    var commandObject: Command | undefined = this.commands.get(command) || this.commands.get(this.aliases.get(command) || '');
+    var commandObject: Command | undefined = CommandHandler.commands.get(command) || CommandHandler.commands.get(CommandHandler.aliases.get(command) || '');
     if (commandObject == undefined) {
       // Tags
       var commandTag: ITag | null = await Tag.findOne({
