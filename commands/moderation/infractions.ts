@@ -10,7 +10,7 @@ class infractions extends Command {
   constructor(client: BotClient) {
     super(client, {
       name: 'infractions',
-      description: "Check a player's previous punishments",
+      description: "Check a user's previous punishments",
       category: 'Moderation',
       aliases: ['inf', 'history', 'puns', 'punishments'],
       permissions: ['MANAGE_MESSAGES'],

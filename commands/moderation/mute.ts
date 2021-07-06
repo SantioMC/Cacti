@@ -8,7 +8,7 @@ class mute extends Command {
   constructor(client: BotClient) {
     super(client, {
       name: 'mute',
-      description: 'Stop a player from speaking',
+      description: 'Stop a user from speaking',
       category: 'Moderation',
       permissions: ['MANAGE_MESSAGES'],
       botPermissions: ['MANAGE_ROLES', 'MANAGE_CHANNELS'],
@@ -40,7 +40,7 @@ class mute extends Command {
     var reason: string = InfractionUtils.getReason(event.unparsedArguments);
 
     if (!user.manageable || !user.kickable)
-      return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this player!'));
+      return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this user!'));
 
     await event.message.guild.roles.fetch();
     var role: Role =

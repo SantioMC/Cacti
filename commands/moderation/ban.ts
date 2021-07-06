@@ -40,7 +40,7 @@ class ban extends Command {
     var reason: string = InfractionUtils.getReason(event.unparsedArguments);
 
     if (!user.manageable || !user.bannable)
-      return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this player!'));
+      return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this user!'));
 
     var id: string = await InfractionUtils.generateUniqueID(event.message.guild.id);
     var updated: boolean = await InfractionUtils.issueInfraction({

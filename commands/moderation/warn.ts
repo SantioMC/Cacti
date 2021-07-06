@@ -37,7 +37,7 @@ class warn extends Command {
     var reason: string = event.arguments.length < 1 ? 'No reason provided' : event.unparsedArguments.join(' ');
 
     if (!user.manageable || !user.kickable)
-      return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this player!'));
+      return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this user!'));
 
     var id: string = await InfractionUtils.generateUniqueID(event.message.guild.id);
     InfractionUtils.issueInfraction(

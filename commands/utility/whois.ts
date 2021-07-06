@@ -6,7 +6,7 @@ class whois extends Command {
   constructor(client: BotClient) {
     super(client, {
       name: 'whois',
-      description: "Check a player's details",
+      description: "Check a user's details",
       category: 'Utility',
       aliases: ['user', 'userinfo', 'ui'],
       permissionLevel: PermissionLevel.Default,
