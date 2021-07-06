@@ -1,4 +1,4 @@
-import mongoose, { CallbackError } from 'mongoose';
+import { Model, model, CallbackError } from 'mongoose';
 import Infraction, { IInfraction } from '../models/infraction';
 import ms from 'ms';
 import { Guild, GuildMember, MessageEmbed, Role, User } from 'discord.js';
@@ -17,7 +17,7 @@ export interface RawInfraction {
 }
 
 export class InfractionUtils {
-  Infraction: mongoose.Model<IInfraction> = mongoose.model('Infraction');
+  Infraction: Model<IInfraction> = model('Infraction');
 
   static generateID(len: number): string {
     const usable = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -27,7 +27,7 @@ export class InfractionUtils {
   }
 
   static async generateUniqueID(guild: string): Promise<string> {
-    const Infraction: mongoose.Model<IInfraction> = mongoose.model('Infraction');
+    const Infraction: Model<IInfraction> = model('Infraction');
     var len: number = 4;
     var tries: number = 0;
     var ret: string = '';
