@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 import mongoose from 'mongoose';
 import { BotClient, IClientData } from './utils/BotClient';
 
