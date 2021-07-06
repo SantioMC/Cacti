@@ -9,14 +9,9 @@ class announce extends Command {
       description: 'Send an embed to a certain channel',
       category: 'Utility',
       aliases: ['broadcast', 'bc'],
+      permissions: ['MANAGE_MESSAGES'],
       permissionLevel: PermissionLevel.Default,
       arguments: [
-        {
-          name: 'channel',
-          description: 'The name of the channel to announce in',
-          required: true,
-          type: 'string'
-        },
         {
           name: 'content',
           description: 'The message to send',
@@ -30,17 +25,10 @@ class announce extends Command {
   execute = async (event: ExecuteEvent) => {
     if (event.message.guild == null) return;
 
-    var channel: TextChannel | null = <TextChannel | null>(
-      event.message.guild.channels.cache
-        .filter((c: GuildChannel) => c.type != 'voice' && c.type != 'category' && c.name.toLowerCase() == <string>event.arguments[0])
-        .first()
-    );
-    if (channel == null)
-      return event.message.channel.send(
-        new MessageEmbed().setTitle(' ').setColor(event.embedColor).setDescription('Unknown channel! Did you spell the name right?')
-      );
+    var channel: TextChannel = <TextChannel>event.message.channel;
+    await event.message.delete();
 
-    var content: string = event.message.content.substring(event.client.data.prefix.length + event.command.length + (<string>event.arguments[0]).length + 2);
+    var content: string = event.message.content.substring(event.client.data.prefix.length + event.command.length + 1);
 
     channel.send(
       new MessageEmbed()
