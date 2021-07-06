@@ -1,0 +1,12 @@
+{
+	"name": "BOT NAME",
+	"token": "BOT TOKEN",
+	"youtube_key": "YOUTUBE V3 API KEY",
+	"database": {
+		"user": "MONGO AUTH USERNAME",
+		"password": "MONGO AUTH PASSWORD"
+	},
+	"prefix": ">",
+	"embedColor": "#ff0000",
+	"loadingEmote": ":thomas:"
+}

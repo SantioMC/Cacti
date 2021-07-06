@@ -1,0 +1,10 @@
+{
+  "lockdown": {
+    "exclude": [
+      "EXCLUDED-CHANNEL-ID"
+    ],
+    "channels": [
+      "INCLUDED-CHANNEL-ID"
+    ]
+  }
+}

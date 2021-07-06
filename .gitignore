@@ -1,0 +1,10 @@
+node_modules/
+.cache/
+.config/
+.idea/
+.npm/
+.vscode/
+config.json
+tsconfig.json
+configs/*
+!configs/example.json
