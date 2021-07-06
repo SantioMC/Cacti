@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "lib": ["es2016"],
+    "module": "commonjs",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "typeRoots": ["@types", "node_modules/@types"]
+  },
+  "exclude": ["node_modules", "@types"]
+}

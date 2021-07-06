@@ -4,8 +4,6 @@ node_modules/
 .idea/
 .npm/
 .vscode/
-config.json
-tsconfig.json
 configs/*
 !configs/example.json
 .env
