@@ -10,7 +10,14 @@ class help extends Command {
       description: 'View all commands on the bot',
       category: 'Essential',
       permissionLevel: PermissionLevel.Default,
-      arguments: []
+      arguments: [
+        {
+          name: 'Category / Command',
+          description: "Check a specific category or command's data",
+          required: false,
+          type: 'string'
+        }
+      ]
     });
   }
 
