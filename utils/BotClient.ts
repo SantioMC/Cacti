@@ -1,9 +1,9 @@
-import {CommandHandler} from './CommandHandler';
+import { CommandHandler } from './CommandHandler';
 import * as discordbtn from 'discord-buttons';
-import {ICommandData} from './Command';
-import {IListenerData} from './Listener';
-import {ListenerHandler} from './ListenerHandler';
-import {InfractionUtils} from './InfractionUtils';
+import { ICommandData } from './Command';
+import { IListenerData } from './Listener';
+import { ListenerHandler } from './ListenerHandler';
+import { InfractionUtils } from './InfractionUtils';
 
 require('discord-reply');
 import Discord = require('discord.js');

@@ -1,6 +1,6 @@
-import {GuildMember, MessageEmbed} from 'discord.js';
-import {BotClient} from '../../utils/BotClient';
-import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
+import { GuildMember, MessageEmbed } from 'discord.js';
+import { BotClient } from '../../utils/BotClient';
+import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
 
 class vckick extends Command {
   constructor(client: BotClient) {

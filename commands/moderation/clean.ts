@@ -1,6 +1,6 @@
-import {BotClient} from '../../utils/BotClient';
-import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
-import {Collection, GuildMember, Message, MessageEmbed, TextChannel} from 'discord.js';
+import { BotClient } from '../../utils/BotClient';
+import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
+import { Collection, GuildMember, Message, MessageEmbed, TextChannel } from 'discord.js';
 
 class clean extends Command {
   constructor(client: BotClient) {

@@ -1,6 +1,6 @@
-import {BotClient} from '../../utils/BotClient';
-import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
-import {GuildChannel, Message, MessageEmbed, Role, TextChannel} from 'discord.js';
+import { BotClient } from '../../utils/BotClient';
+import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
+import { GuildChannel, Message, MessageEmbed, Role, TextChannel } from 'discord.js';
 
 class lockdown extends Command {
   lockeddown: Map<string, TextChannel[]> = new Map();

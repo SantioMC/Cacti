@@ -1,6 +1,6 @@
-import {BotClient} from '../utils/BotClient';
-import {Listener} from '../utils/Listener';
-import {Message, MessageReaction, TextChannel, User} from 'discord.js';
+import { BotClient } from '../utils/BotClient';
+import { Listener } from '../utils/Listener';
+import { Message, MessageReaction, TextChannel, User } from 'discord.js';
 
 export class afkListener extends Listener {
   constructor(client: BotClient) {

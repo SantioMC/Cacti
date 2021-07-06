@@ -1,6 +1,6 @@
-import {BotClient} from '../../utils/BotClient';
-import {Command, ExecuteEvent, PermissionLevel} from '../../utils/Command';
-import {GuildEmoji, MessageEmbed} from 'discord.js';
+import { BotClient } from '../../utils/BotClient';
+import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
+import { GuildEmoji, MessageEmbed } from 'discord.js';
 
 class afk extends Command {
   constructor(client: BotClient) {

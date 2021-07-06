@@ -1,8 +1,8 @@
-import mongoose, {CallbackError} from 'mongoose';
-import Infraction, {IInfraction} from '../models/infraction';
+import mongoose, { CallbackError } from 'mongoose';
+import Infraction, { IInfraction } from '../models/infraction';
 import ms from 'ms';
-import {Guild, GuildMember, MessageEmbed, Role, User} from 'discord.js';
-import {BotClient} from './BotClient';
+import { Guild, GuildMember, MessageEmbed, Role, User } from 'discord.js';
+import { BotClient } from './BotClient';
 
 export interface RawInfraction {
   id: string;
