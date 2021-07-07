@@ -7,6 +7,8 @@ import { InfractionUtils } from './InfractionUtils';
 
 require('discord-reply');
 import Discord = require('discord.js');
+import GuildQueue from './GuildQueue';
+import SongManager from './SongManager';
 
 const YouTube = require('simple-youtube-api');
 
@@ -25,9 +27,11 @@ export class BotClient extends Discord.Client {
   events: Array<IListenerData> = [];
   data!: IClientData;
   clearFormatting!: Function;
+  queues: Map<string, GuildQueue> = new Map();
   afk: Map<string, string | null> = new Map();
   reactions: Map<string, string> = new Map();
   youtube!: any;
+  songManager!: SongManager;
 
   EMOTE_REGEX!: RegExp;
   IMAGE_REGEX!: RegExp;
@@ -45,6 +49,7 @@ export class BotClient extends Discord.Client {
 
     this.data = data;
     this.youtube = new YouTube(data.youtubeKey);
+    this.songManager = new SongManager(this);
     var commandHandler: CommandHandler = new CommandHandler(this);
 
     this.registerReactions();
