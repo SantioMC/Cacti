@@ -1,5 +1,6 @@
 import { GuildMember, Message, PermissionResolvable } from 'discord.js';
 import { BotClient } from './BotClient';
+import GuildQueue from './GuildQueue';
 
 export class Command {
   public data!: ICommandData;
@@ -59,6 +60,7 @@ export interface ExecuteEvent {
   slashCommand: Boolean;
   embedColor: string;
   loadingEmote: string;
+  musicQueue: GuildQueue;
 }
 
 export enum PermissionLevel {

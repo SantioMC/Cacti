@@ -135,6 +135,7 @@ class GuildQueue {
       if (this.connection == null) return;
       if (this.playing) return console.log('Attempted to play song for ' + guild.name + ' when already playing!');
       this.playing = true;
+      this.clearVoteSkips();
       let track: Track | null = this.getCurrent();
       if (track == null) {
         this.playing = false;

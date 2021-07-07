@@ -5,6 +5,7 @@ import { Argument, Command, ICommandData, PermissionLevel } from './Command';
 import * as mongoose from 'mongoose';
 import { ITag } from '../models/tag';
 import fs = require('fs');
+import GuildQueue from './GuildQueue';
 
 export class CommandHandler {
   static commands: Map<string, Command> = new Map();
@@ -100,6 +101,12 @@ export class CommandHandler {
 
       return;
     }
+
+    var musicQueue: GuildQueue | undefined = this.client.queues.has(message.guild.id)
+      ? this.client.queues.get(message.guild.id)
+      : new GuildQueue(this.client, message.guild);
+    if (musicQueue == null) return;
+    if (!this.client.queues.has(message.guild.id)) this.client.queues.set(message.guild.id, musicQueue);
     var executeFunction: Function = commandObject.execute;
     var data: ICommandData = commandObject.data;
     if (data.guild != undefined && data.guild != message.guild?.id) return;
@@ -188,7 +195,8 @@ export class CommandHandler {
         slashCommand: false,
         embedColor: this.client.data.embedColor,
         loadingEmote: this.client.data.loadingEmote,
-        command: command
+        command: command,
+        musicQueue: musicQueue
       });
       return;
     }
@@ -213,7 +221,8 @@ export class CommandHandler {
             slashCommand: false,
             embedColor: this.client.data.embedColor,
             loadingEmote: this.client.data.loadingEmote,
-            command: command
+            command: command,
+            musicQueue: musicQueue
           });
         return;
       }
@@ -274,7 +283,8 @@ export class CommandHandler {
           embedColor: this.client.data.embedColor,
           loadingEmote: this.client.data.loadingEmote,
           slashCommand: false,
-          command: command
+          command: command,
+          musicQueue: musicQueue
         });
       }
       index++;
