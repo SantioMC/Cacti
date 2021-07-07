@@ -29,14 +29,7 @@ class stop extends Command {
     queue.shutdown();
     queue.connection?.disconnect();
 
-    event.message.channel.send(
-      new MessageEmbed()
-        .setTitle(' ')
-        .setColor(event.embedColor)
-        .setDescription('Successfully cleared and disconnected the queue!')
-        .setFooter('Requested by ' + event.message.author.tag)
-        .setTimestamp()
-    );
+    event.message.channel.send(new MessageEmbed().setTitle(' ').setColor(event.embedColor).setDescription('Successfully cleared and disconnected the queue!'));
   };
 }
 

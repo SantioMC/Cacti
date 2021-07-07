@@ -52,7 +52,7 @@ class play extends Command {
       new MessageEmbed()
         .setTitle(' ')
         .setColor(event.embedColor)
-        .setDescription(`Added ${track.video.title} to the queue!\n*Requested by ${event.message.author.tag}*`)
+        .setDescription(`Added \`${track.video.title}\` to the queue!\n*Requested by ${event.message.author.tag}*`)
     );
   };
 }
