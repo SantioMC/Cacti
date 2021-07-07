@@ -24,7 +24,7 @@ class whois extends Command {
   execute = async (event: ExecuteEvent) => {
     var message: Message = await event.message.channel.send(event.loadingEmote + ' Fetching information...');
 
-    var user: GuildMember | null = event.members.length >= 1 ? event.members[0] : event.message.member;
+    var user: GuildMember | null = event.members.length >= 1 ? <GuildMember>event.arguments.shift() : event.message.member;
     if (user == null) return message.edit(':x: Unable to find user information!');
 
     var roles: string[] = user.roles?.cache
