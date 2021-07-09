@@ -32,7 +32,7 @@ class clean extends Command {
   execute = async (event: ExecuteEvent) => {
     await event.message.delete();
 
-    var amount: number = <number>event.arguments.shift();
+    var amount: number = <number>event.arguments[0];
     if (amount < 2 || amount > 100)
       return event.message.channel.send(
         new MessageEmbed().setTitle(' ').setColor(event.embedColor).setDescription('You can only delete up to 100 messages! (min of 2)')
@@ -42,7 +42,7 @@ class clean extends Command {
     if (event.arguments.length < 2) {
       deleted = await (<TextChannel>event.message.channel).bulkDelete(amount, true);
     } else {
-      var user: GuildMember = <GuildMember>event.arguments.shift();
+      var user: GuildMember = <GuildMember>event.arguments[1];
 
       event.message.channel.messages.fetch().then(async (messages: Collection<string, Message>) => {
         messages = messages.filter((m: Message) => m.author.id == user.id);
