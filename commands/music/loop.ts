@@ -10,7 +10,7 @@ class loop extends Command {
       description: 'Sets a song on repeat',
       category: 'Music',
       supportsDJ: true,
-      permissionLevel: PermissionLevel.Default,
+      permissionLevel: PermissionLevel.Developer,
       aliases: ['l', 'repeat']
     });
   }

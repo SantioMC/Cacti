@@ -11,7 +11,7 @@ class skip extends Command {
       description: 'Skips the current song and goes to the next',
       category: 'Music',
       supportsDJ: true,
-      permissionLevel: PermissionLevel.Default,
+      permissionLevel: PermissionLevel.Developer,
       aliases: ['s', 'next', 'nextsong', 'nexttrack']
     });
   }

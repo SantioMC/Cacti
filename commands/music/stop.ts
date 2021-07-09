@@ -10,7 +10,7 @@ class stop extends Command {
       description: 'Clears the queue and ends the existing song',
       category: 'Music',
       supportsDJ: true,
-      permissionLevel: PermissionLevel.Default,
+      permissionLevel: PermissionLevel.Developer,
       aliases: ['d', 'disconnect', 'end']
     });
   }

@@ -10,7 +10,7 @@ class loopqueue extends Command {
       description: 'Sets the guild queue on repeat',
       category: 'Music',
       supportsDJ: true,
-      permissionLevel: PermissionLevel.Default,
+      permissionLevel: PermissionLevel.Developer,
       aliases: ['lq', 'repeatqueue']
     });
   }

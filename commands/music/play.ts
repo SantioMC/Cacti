@@ -11,7 +11,7 @@ class play extends Command {
       category: 'Music',
       botPermissions: ['SPEAK', 'CONNECT'],
       supportsDJ: true,
-      permissionLevel: PermissionLevel.Default,
+      permissionLevel: PermissionLevel.Developer,
       aliases: ['p', 'youtube'],
       arguments: [
         {
@@ -31,7 +31,7 @@ class play extends Command {
       return event.message.channel.send(
         new MessageEmbed()
           .setTitle(' ')
-          .setDescription('I was not able to find `' + event.client.clearFormatting(query) + '!')
+          .setDescription('I was not able to find `' + event.client.clearFormatting(query) + '`!')
           .setColor('#ff0000')
       );
     }
@@ -52,6 +52,7 @@ class play extends Command {
       new MessageEmbed()
         .setTitle(' ')
         .setColor(event.embedColor)
+        .setThumbnail(track.video.thumbnails.default.url)
         .setDescription(`Added \`${track.video.title}\` to the queue!\n*Requested by ${event.message.author.tag}*`)
     );
   };

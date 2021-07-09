@@ -10,7 +10,7 @@ class queue extends Command {
       name: 'queue',
       description: 'Shows the track queue for the guild',
       category: 'Music',
-      permissionLevel: PermissionLevel.Default,
+      permissionLevel: PermissionLevel.Developer,
       aliases: ['q', 'tracks', 'songs']
     });
   }

@@ -9,8 +9,8 @@ class volume extends Command {
       name: 'volume',
       description: 'Sets the volume for the current track',
       category: 'Music',
-      permissionLevel: PermissionLevel.Default,
-      aliases: ['v', 'setvolume', 'sv'],
+      permissionLevel: PermissionLevel.Developer,
+      aliases: ['v', 'setvolume', 'sv', 'vol'],
       supportsDJ: true,
       arguments: [
         {
