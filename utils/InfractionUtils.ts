@@ -90,7 +90,7 @@ export class InfractionUtils {
   }
 
   static getReason(args: string[]): string {
-    if (this.getTime(args[0]) != -1 || ['forever', '-1', 'perm', '-p', '-perm'].includes(args[0])) args.shift();
+    if (['forever', '-1', 'perm', '-p', '-perm'].includes(args[0])) args.shift();
     return args.join(' ') == '' ? 'No reason provided' : args.join(' ');
   }
 
