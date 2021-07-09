@@ -38,15 +38,17 @@ class clean extends Command {
         new MessageEmbed().setTitle(' ').setColor(event.embedColor).setDescription('You can only delete up to 100 messages! (min of 2)')
       );
 
-    var deleted: Collection<string, Message> = new Collection();
+    var deleted: number = 0;
     if (event.arguments.length < 2) {
-      deleted = await (<TextChannel>event.message.channel).bulkDelete(amount, true);
+      var messages: Collection<string, Message> = await (<TextChannel>event.message.channel).bulkDelete(amount, true);
+      deleted = messages.size;
     } else {
       var user: GuildMember = <GuildMember>event.arguments[1];
 
       event.message.channel.messages.fetch().then(async (messages: Collection<string, Message>) => {
         messages = messages.filter((m: Message) => m.author.id == user.id);
-        deleted = await (<TextChannel>event.message.channel).bulkDelete(messages.array().slice(0, amount));
+        await (<TextChannel>event.message.channel).bulkDelete(messages.array().slice(0, amount));
+        deleted = messages.array().slice(0, amount).length;
       });
     }
 
@@ -55,7 +57,7 @@ class clean extends Command {
         new MessageEmbed()
           .setTitle(' ')
           .setColor(event.embedColor)
-          .setDescription('Successfully deleted **' + deleted.size + '** message' + (deleted.size > 1 ? 's' : '') + '!')
+          .setDescription('Successfully deleted **' + deleted + '** message' + (deleted > 1 ? 's' : '') + '!')
       )
       .then((m: Message) => m.delete({ timeout: 3000 }));
   };
