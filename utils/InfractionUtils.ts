@@ -80,7 +80,13 @@ export class InfractionUtils {
   }
 
   static getTime(time: string): number {
-    return ms(time) || -1;
+    var ret: number;
+    try {
+      ret = ms(time);
+    } catch (_ignored) {
+      ret = -1;
+    }
+    return ret;
   }
 
   static getReason(args: string[]): string {
