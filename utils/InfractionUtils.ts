@@ -22,7 +22,7 @@ export class InfractionUtils {
   static generateID(len: number): string {
     const usable = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     var ret: string = '';
-    for (var i: number = 0; i < len; i++) ret += usable[Math.round(Math.random() * usable.length)];
+    for (var i: number = 0; i < len; i++) ret += usable[Math.floor(Math.random() * usable.length)];
     return ret;
   }
 
@@ -90,7 +90,8 @@ export class InfractionUtils {
   }
 
   static getReason(args: string[]): string {
-    if (['forever', '-1', 'perm', '-p', '-perm'].includes(args[0])) args.shift();
+    if (this.getTime(args[0]) == -1 && ['forever', '-1', 'perm', '-p', '-perm'].includes(args[0])) args.shift();
+    else if (this.getTime(args[0]) != -1) args.shift();
     return args.join(' ') == '' ? 'No reason provided' : args.join(' ');
   }
 
