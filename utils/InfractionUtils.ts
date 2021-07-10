@@ -101,17 +101,19 @@ export class InfractionUtils {
     var guild: Guild | null = await client.guilds.fetch(inf.guild);
     if (guild == null) return;
 
-    switch (infraction.type) {
-      case 'MUTE':
-        var role: Role | undefined = guild.roles.cache.filter((r: Role) => r.name.toLowerCase() == 'muted').first();
-        if (role == null) return;
-        var user: GuildMember | null = await guild.members.fetch(inf.victim);
-        if (user != null) user.roles.remove(role);
-        break;
-      case 'BAN':
-        guild.members.unban(inf.victim);
-        break;
-    }
+    try {
+      switch (infraction.type) {
+        case 'MUTE':
+          var role: Role | undefined = guild.roles.cache.filter((r: Role) => r.name.toLowerCase() == 'muted').first();
+          if (role == null) return;
+          var user: GuildMember | null = await guild.members.fetch(inf.victim);
+          if (user != null) user.roles.remove(role);
+          break;
+        case 'BAN':
+          guild.members.unban(inf.victim);
+          break;
+      }
+    } catch (_ignored) {}
 
     await Infraction.updateOne({ guild: infraction.guild, id: infraction.id }, { active: false });
 
