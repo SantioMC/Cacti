@@ -61,9 +61,9 @@ class mute extends Command {
       });
     });
 
-    await user.roles.add(role);
-
     var id: string = await InfractionUtils.generateUniqueID(event.message.guild.id);
+    await user.roles.add(role, 'Infraction #' + id);
+
     var updated: boolean = await InfractionUtils.issueInfraction({
       id: id,
       type: 'MUTE',

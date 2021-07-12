@@ -43,6 +43,8 @@ class ban extends Command {
       return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this user!'));
 
     var id: string = await InfractionUtils.generateUniqueID(event.message.guild.id);
+    await user.ban({ reason: 'Infraction #' + id });
+
     var updated: boolean = await InfractionUtils.issueInfraction({
       id: id,
       type: 'BAN',
@@ -81,8 +83,6 @@ class ban extends Command {
         );
       }
     } catch (_ignored) {}
-
-    await user.ban({ reason: 'Infraction #' + id });
   };
 }
 
