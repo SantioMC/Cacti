@@ -51,6 +51,7 @@ export class InfractionUtils {
 
   static async getInfraction(guild: string, query: string, type: string | undefined): Promise<IInfraction | null> {
     var ret: IInfraction | null;
+    query = query.replace(/<|@|>|!/gi, '');
     ret = await Infraction.findOne({ guild: guild, id: query, type });
     if (ret == null) ret = await this.getLatestActiveInfraction(guild, query, type);
     return ret;
