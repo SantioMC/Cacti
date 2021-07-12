@@ -82,7 +82,7 @@ export class InfractionUtils {
   static getTime(time: string): number {
     var ret: number;
     try {
-      ret = ms(time);
+      ret = ms(time) || -1;
     } catch (_ignored) {
       ret = -1;
     }
