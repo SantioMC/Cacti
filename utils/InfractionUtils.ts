@@ -95,7 +95,6 @@ export class InfractionUtils {
     else if (this.getTime(args[0]) != -1) args.shift();
     return args.join(' ') == '' ? 'No reason provided' : args.join(' ');
   }
-
   static async expireInfraction(client: BotClient, infraction: IInfraction) {
     var inf: IInfraction | null = await Infraction.findOne({ guild: infraction.guild, id: infraction.id });
     if (inf == null || !inf.active) return;
