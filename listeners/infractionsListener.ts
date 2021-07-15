@@ -31,6 +31,7 @@ export class infractionListener extends Listener {
 
       if (button.message.author.id != this.client.user?.id) return;
       if (button.message.embeds.length < 1) return;
+      if (button!.message.member?.hasPermission('MANAGE_MESSAGES')) return;
 
       var embed: MessageEmbed = button.message.embeds[0];
       var embedData: string[] | undefined = embed.description?.split('\n');
