@@ -1,6 +1,6 @@
 import { BotClient } from '../../utils/BotClient';
 import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
-import { GuildChannel, Message, MessageEmbed, Role, TextChannel } from 'discord.js';
+import { Guild, GuildChannel, Message, MessageEmbed, Role, TextChannel } from 'discord.js';
 
 class lockdown extends Command {
   lockeddown: Map<string, TextChannel[]> = new Map();
@@ -53,6 +53,9 @@ class lockdown extends Command {
           SEND_MESSAGES: null
         });
       });
+
+      // @ts-ignore
+      this.lockeddown.delete(event.message.guild.id);
 
       return event.message.channel.send(
         new MessageEmbed()
