@@ -38,7 +38,7 @@ class ban extends Command {
     event.unparsedArguments.shift();
     var shouldDelete: string | undefined = event.unparsedArguments.filter((s: string) => s.startsWith('d:'))[0];
     if (shouldDelete != undefined) event.unparsedArguments = event.unparsedArguments.filter((s: string) => !s.startsWith('d:'));
-    var deleteLength: number = shouldDelete != undefined && !isNaN(Number(shouldDelete.substring(2))) ? Number(shouldDelete.substring(2)) : 0;
+    var deleteLength: number = shouldDelete != undefined && !isNaN(Number(shouldDelete.substring(2))) ? Number(shouldDelete.substring(2)) : 1;
     var length: number = InfractionUtils.getTime(event.unparsedArguments[0]);
     var reason: string = InfractionUtils.getReason(event.unparsedArguments);
 
@@ -52,9 +52,21 @@ class ban extends Command {
     if (!user.manageable || !user.bannable)
       return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this user!'));
 
-    var id: string = await InfractionUtils.generateUniqueID(event.message.guild.id);
-    await user.ban({ reason: 'Infraction #' + id, days: deleteLength });
+    await user.ban({
+      reason: `Cacti Infraction | Banned by: ${event.message.author.tag} (ID: ${event.message.author.id}) | Reason: ${reason}`,
+      days: deleteLength
+    });
 
+    var formattedLength = length == -1 ? 'FOREVER' : ms(length, { long: true });
+    await message.edit(
+      ` `,
+      new MessageEmbed()
+        .setTitle(' ')
+        .setDescription(`Successfully banned <@${user.id}>!\nReason: \`${reason}\`\nDuration: \`${formattedLength}\``)
+        .setColor(event.embedColor)
+    );
+
+    var id: string = await InfractionUtils.generateUniqueID(event.message.guild.id);
     var updated: boolean = await InfractionUtils.issueInfraction({
       id: id,
       type: 'BAN',
@@ -67,10 +79,6 @@ class ban extends Command {
 
     try {
       if (!updated) {
-        await message.edit(
-          ` `,
-          new MessageEmbed().setTitle(' ').setDescription(`Successfully banned <@${user.id}>!\nReason: \`${reason}\``).setColor(event.embedColor)
-        );
         await user.send(
           new MessageEmbed()
             .setTitle(' ')
@@ -78,17 +86,16 @@ class ban extends Command {
             .setDescription('**BANNED**\nYou were banned for __' + reason + '__!')
             .addField('Identifier', id, true)
             .addField('Date Punished', new Date().toTimeString().replace(/ \(.+\)/i, ''), true)
-            .addField('Duration', length == -1 ? 'FOREVER' : ms(length, { long: true }), true)
+            .addField('Duration', formattedLength, true)
         );
       } else {
-        await message.edit(` `, new MessageEmbed().setTitle(' ').setDescription(`Successfully updated <@${user.id}>'s infraction!`).setColor(event.embedColor));
         await user.send(
           new MessageEmbed()
             .setTitle(' ')
             .setColor(event.embedColor)
             .setDescription('**BANNED**\nYour previous infraction was updated!')
             .addField('Date Punished', new Date().toTimeString().replace(/ \(.+\)/i, ''), true)
-            .addField('Duration', length == -1 ? 'FOREVER' : ms(length, { long: true }), true)
+            .addField('Duration', formattedLength, true)
             .addField('Reason', reason, true)
         );
       }

@@ -61,9 +61,18 @@ class mute extends Command {
       });
     });
 
-    var id: string = await InfractionUtils.generateUniqueID(event.message.guild.id);
-    await user.roles.add(role, 'Infraction #' + id);
+    await user.roles.add(role, `Cacti Infraction | Muted by: ${event.message.author.tag} (ID: ${event.message.author.id}) | Reason: ${reason}`);
+    var formattedLength = length == -1 ? 'FOREVER' : ms(length, { long: true });
 
+    message.edit(
+      ` `,
+      new MessageEmbed()
+        .setTitle(' ')
+        .setDescription(`Successfully muted <@${user.id}>!\nReason: \`${reason}\`\nDuration: \`${formattedLength}\``)
+        .setColor(event.embedColor)
+    );
+
+    var id: string = await InfractionUtils.generateUniqueID(event.message.guild.id);
     var updated: boolean = await InfractionUtils.issueInfraction({
       id: id,
       type: 'MUTE',
@@ -76,10 +85,6 @@ class mute extends Command {
 
     try {
       if (!updated) {
-        message.edit(
-          ` `,
-          new MessageEmbed().setTitle(' ').setDescription(`Successfully muted <@${user.id}>!\nReason: \`${reason}\``).setColor(event.embedColor)
-        );
         user.send(
           new MessageEmbed()
             .setTitle(' ')
@@ -87,17 +92,16 @@ class mute extends Command {
             .setDescription('**MUTED**\nYou were muted for __' + reason + '__!')
             .addField('Identifier', id, true)
             .addField('Date Punished', new Date().toTimeString().replace(/ \(.+\)/i, ''), true)
-            .addField('Duration', length == -1 ? 'FOREVER' : ms(length, { long: true }), true)
+            .addField('Duration', formattedLength, true)
         );
       } else {
-        message.edit(` `, new MessageEmbed().setTitle(' ').setDescription(`Successfully updated <@${user.id}>'s infraction!`).setColor(event.embedColor));
         user.send(
           new MessageEmbed()
             .setTitle(' ')
             .setColor(event.embedColor)
             .setDescription('**MUTED**\nYour previous infraction was updated!')
             .addField('Date Punished', new Date().toTimeString().replace(/ \(.+\)/i, ''), true)
-            .addField('Duration', length == -1 ? 'FOREVER' : ms(length, { long: true }), true)
+            .addField('Duration', formattedLength, true)
             .addField('Reason', reason, true)
         );
       }
