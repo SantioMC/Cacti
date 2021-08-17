@@ -40,7 +40,7 @@ class eightball extends Command {
     var embed: MessageEmbed = new MessageEmbed().setTitle(' ').setColor(event.embedColor).setDescription(':8ball: *Thinking...*');
     var message: Message = await event.message.channel.send(embed);
 
-    embed.setDescription(':8ball: ' + responses[Math.floor(Math.random() * responses.length) + 1]);
+    embed.setDescription(':8ball: ' + responses[Math.floor(Math.random() * responses.length)]);
     setTimeout(() => message.edit(' ', embed), 1500);
   };
 }
