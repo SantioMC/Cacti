@@ -52,6 +52,8 @@ class ban extends Command {
     if (!user.manageable || !user.bannable)
       return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this user!'));
 
+    event.message.delete();
+
     await user.ban({
       reason: `Cacti Infraction | Banned by: ${event.message.author.tag} (ID: ${event.message.author.id}) | Reason: ${reason}`,
       days: deleteLength

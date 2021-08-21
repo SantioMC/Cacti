@@ -42,6 +42,8 @@ class mute extends Command {
     if (!user.manageable || !user.kickable)
       return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this user!'));
 
+    event.message.delete();
+
     await event.message.guild.roles.fetch();
     var role: Role =
       event.message.guild.roles.cache.filter((r: Role) => r.name.toLowerCase() == 'muted').first() ||
