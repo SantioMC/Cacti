@@ -41,8 +41,8 @@ class poll extends Command {
     var index: number = 0;
     event.unparsedArguments.forEach((answer: string) => {
       var letter: string = answer.trim().charAt(0);
-      if (useNumbers) questions += `${event.client.reactions.get('' + (index + 1))} **${answer}**: 0\n`;
-      else questions += `${event.client.reactions.get(letter)} **${answer}**: 0\n`;
+      if (useNumbers) questions += `${event.client.reactions.get('' + (index + 1))} **${answer}**\n`;
+      else questions += `${event.client.reactions.get(letter)} **${answer}**\n`;
       index++;
     });
 
