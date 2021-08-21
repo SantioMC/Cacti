@@ -1,6 +1,6 @@
 import { BotClient } from '../../utils/BotClient';
 import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
-import { Collection, GuildMember, Message, MessageEmbed, TextChannel } from 'discord.js';
+import { Collection, GuildMember, Message, MessageEmbed, Snowflake, TextChannel } from 'discord.js';
 
 class clean extends Command {
   constructor(client: BotClient) {
@@ -38,28 +38,36 @@ class clean extends Command {
         new MessageEmbed().setTitle(' ').setColor(event.embedColor).setDescription('You can only delete up to 100 messages! (min of 2)')
       );
 
-    var deleted: number = 0;
+    var messages: Collection<Snowflake, Message>;
     if (event.arguments.length < 2) {
-      var messages: Collection<string, Message> = await (<TextChannel>event.message.channel).bulkDelete(amount, true);
-      deleted = messages.size;
+      messages = await event.message.channel.messages.fetch().then((m) => (messages = m));
     } else {
       var user: GuildMember = <GuildMember>event.arguments[1];
 
-      event.message.channel.messages.fetch().then(async (messages: Collection<string, Message>) => {
-        messages = messages.filter((m: Message) => m.author.id == user.id);
-        await (<TextChannel>event.message.channel).bulkDelete(messages.array().slice(0, amount));
-        deleted = messages.array().slice(0, amount).length;
-      });
+      messages = await event.message.channel.messages.fetch().then((m) => (messages = m));
+      messages = messages.filter((m) => m.author.id == user.id);
     }
 
-    event.message.channel
-      .send(
-        new MessageEmbed()
-          .setTitle(' ')
-          .setColor(event.embedColor)
-          .setDescription('Successfully deleted **' + deleted + '** message' + (deleted > 1 ? 's' : '') + '!')
-      )
-      .then((m: Message) => m.delete({ timeout: 3000 }));
+    (<TextChannel>event.message.channel)
+      .bulkDelete(messages.first(amount))
+      .then((deleted) => {
+        event.message.channel
+          .send(
+            new MessageEmbed()
+              .setTitle(' ')
+              .setColor(event.embedColor)
+              .setDescription('Successfully deleted **' + deleted.size + '** message' + (deleted.size > 1 ? 's' : '') + '!')
+          )
+          .then((m: Message) => m.delete({ timeout: 3000 }));
+      })
+      .catch((e) => {
+        event.message.channel.send(
+          new MessageEmbed()
+            .setTitle(' ')
+            .setColor('#ff0000')
+            .setDescription('Failed to purge ' + amount + ' messages!')
+        );
+      });
   };
 }
 
