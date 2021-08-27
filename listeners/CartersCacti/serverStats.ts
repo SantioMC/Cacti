@@ -21,14 +21,14 @@ export class serverStats extends Listener {
     });
 
     client.on('channelCreate', (channel: Channel) => {
-      if (channel instanceof GuildChannel) return;
+      if (!(channel instanceof GuildChannel)) return;
       var guildChannel: GuildChannel = <GuildChannel>channel;
       if (guildChannel.guild.id != '696027249002020896') return;
       updateChannelCount(guildChannel.guild);
     });
 
     client.on('channelDelete', (channel: Channel) => {
-      if (channel instanceof GuildChannel) return;
+      if (!(channel instanceof GuildChannel)) return;
       var guildChannel: GuildChannel = <GuildChannel>channel;
       if (guildChannel.guild.id != '696027249002020896') return;
       updateChannelCount(guildChannel.guild);
