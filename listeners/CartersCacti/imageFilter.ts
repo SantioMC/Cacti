@@ -17,8 +17,10 @@ export class imageFilter extends Listener {
     var logChannel: TextChannel | null = null;
 
     client.on('message', async (message: Message) => {
-      if (logChannel == null) logChannel = <TextChannel>await client.channels.fetch('861767697418944572');
-      if (message.guild?.id != '696027249002020896' || message.author.bot || logChannel == null) return;
+      try {
+        if (logChannel == null) logChannel = <TextChannel>await client.channels.fetch('861767697418944572');
+        if (message.guild?.id != '696027249002020896' || message.author.bot || logChannel == null) return;
+      } catch (_ignored) {}
 
       message.attachments.forEach((attachment: MessageAttachment) => {
         if (this.imageRegex.test(attachment.url)) runFilter(message.author, attachment.url);
