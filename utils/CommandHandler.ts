@@ -55,7 +55,7 @@ export class CommandHandler {
     if (message.guild == null) return;
 
     var prefixLength: number = this.client?.data.prefix.length || 0;
-    var parsedArgs: string[] = parseArgs(message.content.replace(/“/g, '“'));
+    var parsedArgs: string[] = parseArgs(message.content.replace(/“/g, '"'));
     var command: string | undefined = parsedArgs.shift()?.toLowerCase().substring(prefixLength);
     if (command == undefined) return;
     var commandObject: Command | undefined = CommandHandler.commands.get(command) || CommandHandler.commands.get(CommandHandler.aliases.get(command) || '');
@@ -293,9 +293,10 @@ export class CommandHandler {
 }
 
 function parseArgs(message: string): string[] {
-  var args: string[] = message.match(/[^\s"']+|"([^"]*)"|'([^']*)'/gi) || [];
+  message = message.replace(/“/g, '"');
+  var args: string[] = message.match(/[^\s"”']+|"([^"]*)"|'([^']*)'|”([^”]*)”/gi) || [];
   args.forEach((arg: string, index: number) => {
-    args[index] = arg.replace(/["']/gi, '');
+    args[index] = arg.substring(1, arg.length - 1);
   });
   return args;
 }

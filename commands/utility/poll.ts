@@ -42,7 +42,7 @@ class poll extends Command {
     event.unparsedArguments.forEach((answer: string) => {
       var letter: string = answer.trim().charAt(0);
       if (useNumbers) questions += `${event.client.reactions.get('' + (index + 1))} **${answer}**\n`;
-      else questions += `${event.client.reactions.get(letter)} **${answer}**\n`;
+      else questions += `${event.client.reactions.get(letter.toUpperCase())} **${answer}**\n`;
       index++;
     });
 
@@ -59,7 +59,7 @@ class poll extends Command {
       }
     } else {
       for (var letter in used) {
-        var reaction: string | undefined = event.client.reactions.get(used[letter]);
+        var reaction: string | undefined = event.client.reactions.get(used[letter].toUpperCase());
         if (reaction != null) await message.react(reaction);
       }
     }
