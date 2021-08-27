@@ -35,7 +35,7 @@ export class serverStats extends Listener {
     });
 
     function updateChannelCount(guild: Guild) {
-      var channels: GuildChannel | undefined = guild.channels.cache.get('721705535812010056');
+      var channels: GuildChannel | undefined = guild.channels.cache.get('721706194892357682');
       var channelCount = guild.channels.cache.size;
 
       channels?.setName(`Channels: ${channelCount}`);
