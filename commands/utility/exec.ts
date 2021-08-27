@@ -46,8 +46,8 @@ class exec extends Command {
       var runtimes = await (await fetch('https://emkc.org/api/v2/piston/runtimes')).json();
       var version = runtimes.filter((r: any) => r.runtime == 'node')[0].version;
 
-      var output = await (
-        await fetch('https://emkc.org/api/v2/piston/execute', {
+      try {
+        var req = await fetch('https://emkc.org/api/v2/piston/execute', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -67,10 +67,13 @@ class exec extends Command {
             compile_memory_limit: -1,
             run_memory_limit: -1
           })
-        })
-      ).json();
+        });
 
-      result = output.run.output;
+        var output = await req.json();
+        result = output.run.output;
+      } catch (e) {
+        result = '// Please try again later - Cacti is currently rate limited.';
+      }
     }
 
     if (result.length > 1975) result = '// Result is too long to show!';
