@@ -29,9 +29,9 @@ class bean extends Command {
     setTimeout(() => {
       bean.edit(``, new MessageEmbed()
       .setTitle(` `)
-      .setDescription(`You have Successfully beaned ` + user.user.tag + `!`)
+      .setDescription(`You have Successfully beaned <@${user.id}>!`)
       .setColor("148b47")
-      .setImage(`http://assets.stickpng.com/images/58afe049829958a978a4a6c0.png`))
+      .setImage(`https://cdn.discordapp.com/attachments/713921994592092181/880933422057537596/test.png`))
   }, 850);
   };
 }
