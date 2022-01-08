@@ -4,6 +4,7 @@ WORKDIR /usr/src/app
 
 ADD . .
 
+RUN npm install -g node-gyp
 RUN npm install
 
 CMD ["npm", "start"]
