@@ -1,6 +1,6 @@
 import { BotClient } from '../../utils/BotClient';
 import { Listener } from '../../utils/Listener';
-import { Message, MessageAttachment, MessageEmbed, TextChannel, User } from 'discord.js';
+import { Message, MessageAttachment, MessageEmbed, TextChannel} from 'discord.js';
 import fetch from 'node-fetch';
 
 export class imageFilter extends Listener {
@@ -23,21 +23,21 @@ export class imageFilter extends Listener {
       } catch (_ignored) {}
 
       message.attachments.forEach((attachment: MessageAttachment) => {
-        if (this.imageRegex.test(attachment.url)) runFilter(message.author, attachment.url);
+        if (this.imageRegex.test(attachment.url)) runFilter(message, attachment.url);
       });
 
       message.content.match(this.linkRegex)?.forEach((url: string) => {
-        if (this.imageRegex.test(url)) runFilter(message.author, url);
+        if (this.imageRegex.test(url)) runFilter(message, url);
       });
     });
-    async function runFilter(author: User, url: string) {
+    async function runFilter(message: Message, url: string) {
       var req = await fetch('https://api.santio.me/filter/image?url=' + url);
       var data = await req.json();
       if (data.flags.includes('Porn') || data.flags.includes('Hentai')) {
         var embed: MessageEmbed = new MessageEmbed()
           .setTitle(' ')
           .setColor('#ff0000')
-          .setDescription(`Image was flagged as NSFW [Flags: ${data.flags.join(', ')}]\nPost by: **${author.tag}** *(${author.id})*`)
+          .setDescription(`Image was flagged as NSFW [Flags: ${data.flags.join(', ')}]\nPost by: **${message.author.tag}** *(${message.author.id})*\n\n[Jump to message](${message.url})`)
           .setImage(url);
 
         if (logChannel != null) logChannel.send(embed);
