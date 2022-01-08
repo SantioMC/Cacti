@@ -4,6 +4,11 @@ WORKDIR /usr/src/app
 
 ADD . .
 
-RUN npm install
+RUN apk --no-cache --virtual build-dependencies add \
+    python \
+    make \
+    g++ \
+    && npm install \
+    && apk del build-dependencies
 
 CMD ["npm", "start"]
