@@ -18,7 +18,7 @@ export class imageFilter extends Listener {
 
     client.on('message', async (message: Message) => {
       try {
-        if (logChannel == null) logChannel = <TextChannel>await client.channels.fetch('861767697418944572');
+        if (logChannel == null) logChannel = <TextChannel>await client.channels.fetch('929195618134544384');
         if (message.guild?.id != '696027249002020896' || message.author.bot || logChannel == null) return;
       } catch (_ignored) {}
 
