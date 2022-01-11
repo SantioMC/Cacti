@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 ADD . .
 
 RUN apk --no-cache --virtual build-dependencies add \
-    python \
+    python3 \
     make \
     g++ \
     && npm install \
