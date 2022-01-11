@@ -15,7 +15,7 @@ export class scamLinkFilter extends Listener {
   constructor(client: BotClient) {
     super(client, {
       name: 'Scam Link Filter',
-      guild: '860700731135492109'
+      guild: '696027249002020896'
     });
 
     // Get log channel;
@@ -23,8 +23,8 @@ export class scamLinkFilter extends Listener {
 
     client.on('message', async (message: Message) => {
       try {
-        if (logChannel == null) logChannel = <TextChannel>await client.channels.fetch('860723657700540436');
-        if (message.guild?.id != '860700731135492109' || message.author.bot || logChannel == null) return;
+        if (logChannel == null) logChannel = <TextChannel>await client.channels.fetch('929195618134544384');
+        if (message.guild?.id != '696027249002020896' || message.author.bot || logChannel == null) return;
       } catch (_ignored) {}
 
       message.content.match(this.linkRegex)?.forEach(async (uri: string) => {
