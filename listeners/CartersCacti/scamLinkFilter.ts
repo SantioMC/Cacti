@@ -68,7 +68,6 @@ export class scamLinkFilter extends Listener {
       if (getMeta(source, "og:image") == "https://discord.com/assets/652f40427e1f5186ad54836074898279.png") flags.push("Usage of discord promotional art in meta on non-discord site")
       //  - Grammar Checks
       if (source.toLowerCase().includes("upgrade your emoji")) flags.push("Improper Grammar (emoji)")
-      if (source.toLowerCase().includes("stand out in your favorite discords")) flags.push("Improper Grammar (discords)")
       //  - Keyword Check
       if (source.toLowerCase().includes("nitro") && source.toLowerCase().includes("free from steam")) flags.push("Invalid Keywords *('nitro' + 'free from steam')*")
 
