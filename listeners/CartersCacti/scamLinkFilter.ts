@@ -15,7 +15,7 @@ export class scamLinkFilter extends Listener {
   constructor(client: BotClient) {
     super(client, {
       name: 'Scam Link Filter',
-      guild: '696027249002020896'
+      guild: '860700731135492109'
     });
 
     // Get log channel;
@@ -23,8 +23,8 @@ export class scamLinkFilter extends Listener {
 
     client.on('message', async (message: Message) => {
       try {
-        if (logChannel == null) logChannel = <TextChannel>await client.channels.fetch('929195618134544384');
-        if (message.guild?.id != '696027249002020896' || message.author.bot || logChannel == null) return;
+        if (logChannel == null) logChannel = <TextChannel>await client.channels.fetch('860723657700540436');
+        if (message.guild?.id != '860700731135492109' || message.author.bot || logChannel == null) return;
       } catch (_ignored) {}
 
       message.content.match(this.linkRegex)?.forEach(async (uri: string) => {
@@ -48,30 +48,40 @@ export class scamLinkFilter extends Listener {
     const scanWebsite = async (uri: string): Promise<Array<String>> => {
       var flags: Array<String> = []
 
-      // Get website source and info
-      var request = await fetch(uri)
-      var source = await request.text()
-      var title = getTitle(source).toLowerCase()
-      var embedDescription = getMeta(source, "description")
-      if (embedDescription == "") embedDescription = getMeta(source, "og:description")
+      try {
+        // Get website source and info
+        var request = await fetch(uri)
+        var source = await request.text()
+        source = source.replace(/о/gi, 'o') // Change unicode `o` to regular `o`
+        var title = getTitle(source)
+        var embedDescription = getMeta(source, "description")
+        if (embedDescription == "") embedDescription = getMeta(source, "og:description")
 
-      // Skip if the site is trusted
-      for (var website in this.trustedWebsites) if (uri.match(this.trustedWebsites[website])) return []
+        // Skip if the site is trusted
+        for (var website in this.trustedWebsites) if (uri.match(this.trustedWebsites[website])) return []
 
-      // Checks
-      //  - Title Check
-      if (title.includes("free") && title.includes("nitro") && title.includes("steam")) flags.push(`Title Check *(${title})*`)
-      //  - Meta Check
-      if (embedDescription.toLowerCase().includes("free")
-        && embedDescription.toLowerCase().includes("nitro")
-        && embedDescription.toLowerCase().includes("steam")) flags.push(`Description Meta Check *(${embedDescription})*`)
-      if (getMeta(source, "og:image") == "https://discord.com/assets/652f40427e1f5186ad54836074898279.png") flags.push("Usage of discord promotional art in meta on non-discord site")
-      //  - Grammar Checks
-      if (source.toLowerCase().includes("upgrade your emoji")) flags.push("Improper Grammar (emoji)")
-      //  - Keyword Check
-      if (source.toLowerCase().includes("nitro") && source.toLowerCase().includes("free from steam")) flags.push("Invalid Keywords *('nitro' + 'free from steam')*")
+        // Checks
+        //  - Title Check
+        if (containsKeywords(title, "free nitro stream")) flags.push(`Title Check *(${title})*`)
+        if (title.toLowerCase() == "discord") flags.push(`Title Check *(${title})*`)
+        //  - Meta Check
+        if (containsKeywords(embedDescription, "free nitro steam")) flags.push(`Invalid meta **cacti:description** *(${embedDescription})*`)
+        if (containsKeywords(embedDescription, "gift nitro")) flags.push(`Invalid meta **cacti:description** *(${embedDescription})*`)
+        if (getMeta(source, "og:image") == "https://discord.com/assets/652f40427e1f5186ad54836074898279.png") flags.push("Usage of discord promotional art in meta on non-discord site")
+        if (getMeta(source, "og:site_name").toLowerCase().trim() == "discord") flags.push(`Invalid meta **og:site_name** *(${getMeta(source, "og:site_name")})*`)
+        if (getMeta(source, "twitter:site").toLowerCase().trim() == "@discord") flags.push(`Invalid meta **twitter:site** *(${getMeta(source, "twitter:site")})*`)
+        if (getMeta(source, "twitter:creator").toLowerCase().trim() == "@discord") flags.push(`Invalid meta **twitter:creator** *(${getMeta(source, "twitter:creator")})*`)
+        //  - Grammar Checks
+        if (source.toLowerCase().includes("upgrade your emoji")) flags.push("Improper Grammar *(emoji)*")
+        //  - Keyword Check
+        if (containsKeywords(source, "nitro free from steam")) flags.push("Invalid Keywords *('nitro' + 'free from steam')*")
+        if (containsKeywords(source, "scan this with the discord mobile app to log in instantly.")) flags.push("Invalid Keywords *('nitro' + 'free from steam')*")
+        // - Reference Check
+        if (source.toLowerCase().includes("discpubl.hb.bizmrg.com")) flags.push("Suspicious call to external reference *(discpubl.hb.bizmrg.com)*")
+        if (source.toLowerCase().includes("cdn.igromania.ru")) flags.push("Suspicious call to external reference *(cdn.igromania.ru)*")
 
-      return flags
+        return flags
+      } catch(e) { return [] }
     }
 
     function getTitle(source: string): string {
@@ -81,10 +91,17 @@ export class scamLinkFilter extends Listener {
     }
 
     function getMeta(source: string, property: string): string {
-      var regex = new RegExp(`<meta( .+)? (property|name)=\"${property}\" content=\"(.+)\"\\/>`, 'i')
+      var regex = new RegExp(`<meta( .+)? (property|name)=\"${property}\" content=\"(.+)\"\\/?>`, 'i')
       var meta = source.match(regex)
       if (!meta || meta.length != 4 || typeof meta[3] !== 'string') return ""
       else return meta[3]
+    }
+
+    function containsKeywords(search: string, query: string): boolean {
+      search = search.toLowerCase()
+      var keywords = query.toLowerCase().trim().split(" ")
+      for (var keyword in keywords) if (!search.includes(keywords[keyword])) return false
+      return true
     }
   }
 }
