@@ -1,4 +1,4 @@
-import { GuildMember, Message, MessageEmbed, User } from "discord.js";
+import { GuildMember, Message, MessageEmbed} from "discord.js";
 import { BotClient } from '../../utils/BotClient';
 import { Command, ExecuteEvent, PermissionLevel } from '../../utils/Command';
 import { InfractionUtils } from '../../utils/InfractionUtils';
@@ -18,7 +18,7 @@ class ban extends Command {
           name: 'user',
           description: 'The user to punish',
           required: true,
-          type: 'user'
+          type: 'member'
         },
         {
           name: 'reason',
@@ -34,7 +34,7 @@ class ban extends Command {
     var message: Message = await event.message?.channel?.send(event.loadingEmote + ' Issuing infraction...');
     if (event.message.guild == null) return;
 
-    var user: User = <User>event.arguments.shift();
+    var member: GuildMember = <GuildMember>event.arguments.shift();
     event.unparsedArguments.shift();
     var shouldDelete: string | undefined = event.unparsedArguments.filter((s: string) => s.startsWith('d:'))[0];
     if (shouldDelete != undefined) event.unparsedArguments = event.unparsedArguments.filter((s: string) => !s.startsWith('d:'));
@@ -49,11 +49,10 @@ class ban extends Command {
       );
     }
 
-    var member: GuildMember = await event.message.guild?.members?.fetch(user);
-    if (member != null && (!member.manageable || !member.bannable))
+    if (!member.manageable || !member.bannable)
       return message.edit(' ', new MessageEmbed().setTitle(' ').setColor('#ff0000').setDescription('I am unable to issue an infraction towards this user!'));
 
-    await event.message.guild?.members?.ban(user, {
+    await event.message.guild?.members?.ban(member, {
       reason: `Cacti Infraction | Banned by: ${event.message.author.tag} (ID: ${event.message.author.id}) | Reason: ${reason}`,
       days: deleteLength
     });
@@ -63,7 +62,7 @@ class ban extends Command {
       ` `,
       new MessageEmbed()
         .setTitle(' ')
-        .setDescription(`Successfully banned <@${user.id}>!\nReason: \`${reason}\`\nDuration: \`${formattedLength}\``)
+        .setDescription(`Successfully banned <@${member.id}>!\nReason: \`${reason}\`\nDuration: \`${formattedLength}\``)
         .setColor(event.embedColor)
     );
 
@@ -73,14 +72,14 @@ class ban extends Command {
       type: 'BAN',
       length: length,
       guild: event.message.guild.id,
-      victim: user.id,
+      victim: member.id,
       staff: event.message.author.id,
       reason: reason
     });
 
     try {
       if (!updated) {
-        await user.send(
+        await member.send(
           new MessageEmbed()
             .setTitle(' ')
             .setColor(event.embedColor)
@@ -90,7 +89,7 @@ class ban extends Command {
             .addField('Duration', formattedLength, true)
         );
       } else {
-        await user.send(
+        await member.send(
           new MessageEmbed()
             .setTitle(' ')
             .setColor(event.embedColor)
