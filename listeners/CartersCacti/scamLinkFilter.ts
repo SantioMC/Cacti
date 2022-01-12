@@ -6,8 +6,7 @@ import fetch from 'node-fetch';
 export class scamLinkFilter extends Listener {
   linkRegex: RegExp = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
   trustedWebsites = [
-    /[A-Z0-9]+\.discord\.com\//i,
-    /[A-Z0-9]+\.discordapp\.com\//i,
+    /[A-Z0-9]+\.discord(app)?\.com\//i,
     /[A-Z0-9]+\.epicgames\.com\//i,
     /[A-Z0-9]+\.reddit\.com\//i
   ]
@@ -73,9 +72,11 @@ export class scamLinkFilter extends Listener {
         if (getMeta(source, "twitter:creator").toLowerCase().trim() == "@discord") flags.push(`Invalid meta **twitter:creator** *(${getMeta(source, "twitter:creator")})*`)
         //  - Grammar Checks
         if (source.toLowerCase().includes("upgrade your emoji")) flags.push("Improper Grammar *(emoji)*")
+        if (source.toLowerCase().includes("discord got present")) flags.push("Improper Grammar *(present)*")
         //  - Keyword Check
-        if (containsKeywords(source, "nitro free from steam")) flags.push("Invalid Keywords *('nitro' + 'free from steam')*")
-        if (containsKeywords(source, "scan this with the discord mobile app to log in instantly.")) flags.push("Invalid Keywords *('nitro' + 'free from steam')*")
+        if (containsKeywords(source, "nitro free from steam")) flags.push("Invalid Keywords *(nitro free from steam)*")
+        if (containsKeywords(source, "scan this with the discord mobile app to log in instantly.")) flags.push("Invalid Keywords *(scan this with the discord mobile app to log in instantly.)*")
+        if (containsKeywords(source, "3 months of enhanced discord experience!")) flags.push("Invalid Keywords *(3 months of enhanced discord experience!)*")
         // - Reference Check
         if (source.toLowerCase().includes("discpubl.hb.bizmrg.com")) flags.push("Suspicious call to external reference *(discpubl.hb.bizmrg.com)*")
         if (source.toLowerCase().includes("cdn.igromania.ru")) flags.push("Suspicious call to external reference *(cdn.igromania.ru)*")
