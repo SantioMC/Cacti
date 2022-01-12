@@ -61,8 +61,8 @@ export class scamLinkFilter extends Listener {
 
         // Checks
         //  - Title Check
-        if (containsKeywords(title, "free nitro stream")) flags.push(`Title Check *(${title})*`)
-        if (title.toLowerCase() == "discord") flags.push(`Title Check *(${title})*`)
+        if (containsKeywords(title, "free nitro stream")
+          || title.toLowerCase() == "discord") flags.push(`Title Check *(${title})*`)
         //  - Meta Check
         if (containsKeywords(embedDescription, "free nitro steam")) flags.push(`Invalid meta **cacti:description** *(${embedDescription})*`)
         if (containsKeywords(embedDescription, "gift nitro")) flags.push(`Invalid meta **cacti:description** *(${embedDescription})*`)
@@ -77,9 +77,11 @@ export class scamLinkFilter extends Listener {
         if (containsKeywords(source, "nitro free from steam")) flags.push("Invalid Keywords *(nitro free from steam)*")
         if (containsKeywords(source, "scan this with the discord mobile app to log in instantly.")) flags.push("Invalid Keywords *(scan this with the discord mobile app to log in instantly.)*")
         if (containsKeywords(source, "3 months of enhanced discord experience!")) flags.push("Invalid Keywords *(3 months of enhanced discord experience!)*")
+        if (source.toLowerCase().includes("open your discord app and go to settings then click scan qr, this will then claim the nitro!")) flags.push("Invalid Keywords *(Open your discord app and go to settings then click scan qr, this will then claim the nitro!)*")
         // - Reference Check
         if (source.toLowerCase().includes("discpubl.hb.bizmrg.com")) flags.push("Suspicious call to external reference *(discpubl.hb.bizmrg.com)*")
         if (source.toLowerCase().includes("cdn.igromania.ru")) flags.push("Suspicious call to external reference *(cdn.igromania.ru)*")
+        if (source.toLowerCase().includes("discordapp.com/ra/")) flags.push("Suspicious call to external reference *(discordapp.com/ra/)*")
 
         return flags
       } catch(e) { return [] }
