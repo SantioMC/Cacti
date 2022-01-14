@@ -35,7 +35,7 @@ export class scamLinkFilter extends Listener {
             .setTitle(' ')
             .setColor('#ff0000')
             .setDescription(`A link sent by <@${message.author.id}> *(${message.author.tag})* contained a suspicious link and was automatically deleted!
-            \n\n**Link:** ${uri}
+            \n**Link:** ${uri}\n**Channel:** <#${message.channel.id}>
             \n**Flags:**\n- ${flags.join("\n- ")}`);
 
           if (logChannel != null) logChannel.send(embed);
