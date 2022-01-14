@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 export class scamLinkFilter extends Listener {
   linkRegex: RegExp = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
   trustedWebsites = [
-    /[A-Z0-9]+\.discord(app)?\.com\//i,
+    /([A-Z0-9]+\.|\/\/)?discord(app)?\.com\//i,
     /[A-Z0-9]+\.epicgames\.com\//i,
     /[A-Z0-9]+\.reddit\.com\//i
   ]
