@@ -30,6 +30,7 @@ export class BotClient extends Discord.Client {
   queues: Map<string, GuildQueue> = new Map();
   afk: Map<string, string | null> = new Map();
   reactions: Map<string, string> = new Map();
+  specialCharacters: Map<string, string> = new Map();
   youtube!: any;
   songManager!: SongManager;
 
@@ -52,7 +53,7 @@ export class BotClient extends Discord.Client {
     this.songManager = new SongManager(this);
     var commandHandler: CommandHandler = new CommandHandler(this);
 
-    this.registerReactions();
+    this.registerMaps();
 
     this.clearFormatting = (message: String, strict: boolean = true): String => {
       message = message.replace(/​/gi, '');
@@ -78,7 +79,7 @@ export class BotClient extends Discord.Client {
     InfractionUtils.startExpireChecker(this);
   }
 
-  registerReactions = () => {
+  registerMaps = () => {
     this.reactions.set('A', '🇦');
     this.reactions.set('B', '🇧');
     this.reactions.set('C', '🇨');
@@ -115,5 +116,8 @@ export class BotClient extends Discord.Client {
     this.reactions.set('7', '7️⃣');
     this.reactions.set('8', '8️⃣');
     this.reactions.set('9', '9️⃣');
+
+    this.reactions.set('с', 'c');
+    this.reactions.set('о', '0');
   };
 }

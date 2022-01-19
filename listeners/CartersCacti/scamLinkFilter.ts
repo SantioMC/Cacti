@@ -51,7 +51,7 @@ export class scamLinkFilter extends Listener {
         // Get website source and info
         var request = await fetch(uri)
         var source = await request.text()
-        source = source.replace(/о/gi, 'o') // Change unicode `o` to regular `o`
+        for (var char in client.specialCharacters) source = source.replace(char, client.specialCharacters.get(char)!!)
         var title = getTitle(source)
         var embedDescription = getMeta(source, "description")
         if (embedDescription == "") embedDescription = getMeta(source, "og:description")
