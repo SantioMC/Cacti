@@ -11,7 +11,7 @@ class kick extends Command {
       name: 'kick',
       description: 'Send a warning out to a user',
       category: 'Moderation',
-      permissions: ['MANAGE_MESSAGES'],
+      permissions: ['KICK_MEMBERS'],
       permissionLevel: PermissionLevel.Default,
       arguments: [
         {
