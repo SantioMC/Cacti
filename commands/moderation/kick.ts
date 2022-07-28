@@ -33,7 +33,6 @@ class kick extends Command {
   execute = async (event: ExecuteEvent) => {
     const Infraction: mongoose.Model<IInfraction> = mongoose.model('Infraction');
     var message: Message = await event.message?.channel?.send(event.loadingEmote + ' Issuing infraction...');
-
     if (event.message.guild == null) return;
 
     var user: GuildMember = <GuildMember>event.arguments.shift();
